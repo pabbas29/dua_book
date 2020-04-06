@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class DuaContent extends StatefulWidget {
@@ -6,68 +7,52 @@ class DuaContent extends StatefulWidget {
 }
 
 class _DuaContentState extends State<DuaContent> {
-
+  List data;
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: PageController(
-        initialPage: 0,
+    return Container(
+      child: Center(
+        child: new FutureBuilder(
+          future: DefaultAssetBundle
+            .of(context)
+            .loadString('data/duaiftitah.json'),
+          builder: (context, snapshot) {
+            var mydata = jsonDecode(snapshot.data.toString());
+
+            return new PageView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return new Container(
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text(
+                        mydata[index]['arabic'],
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.orange[300],
+                        )
+                      ),
+                      new Text(
+                        mydata[index]['indonesian'],
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.orange[300],
+                        )
+                      )
+                    ],
+                  )
+                );
+              },
+              itemCount: mydata.length,
+            );
+          },
+        ),
       ),
-      scrollDirection: Axis.horizontal,
-      children: <Widget>[
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'بِسْمِ اللّهِ الرَّحْمَنِ الرَّ حِيْمِ',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.orange[300],
-                )
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
-                child: Text(
-                  'Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.orange[300],
-                    fontSize: 24,
-                  )
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'اللّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّد',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.orange[300],
-                )
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
-                child: Text(
-                  'Ya Allah, sampaikanlah shalawat kepada Nabi Muhammad dan keluarga Nabi Muhammad',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.orange[300],
-                    fontSize: 24,
-                  )
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
