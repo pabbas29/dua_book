@@ -26,23 +26,29 @@ class _DuaContentState extends State<DuaContent> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Text(
-                        mydata[index]['arabic'],
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.orange[300],
-                        )
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                        child: new Text(
+                          mydata[index]['arabic'],
+                          textAlign: TextAlign.center,
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.orange[300],
+                          )
+                        ),
                       ),
-                      new Text(
-                        mydata[index]['indonesian'],
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.ltr,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.orange[300],
-                        )
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+                        child: new Text(
+                          mydata[index]['indonesian'],
+                          textAlign: TextAlign.center,
+                          textDirection: TextDirection.ltr,
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.orange[300],
+                          )
+                        ),
                       )
                     ],
                   )
